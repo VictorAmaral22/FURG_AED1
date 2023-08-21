@@ -1,6 +1,6 @@
 import sys
 sys.path.insert(1, '../')
-import caseFunction
+import testes.caseFunction as caseFunction
 
 # 1) Faça um programa em python que leia uma frase e a passe para maiúscula. Você não
 # deve utilizar as funções prontas do python para converter para maiúscula ou minúscula.

@@ -3,7 +3,7 @@
 # else:
 #     print("não")
 
-import caseFunction
+import testes.caseFunction as caseFunction
 
 # Testar se tem todas as letas do alfabeto
 text = input("Informe um texto: ")
