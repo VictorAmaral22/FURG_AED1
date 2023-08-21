@@ -6,11 +6,38 @@
 #     -Ver a média dos elementos da lista
 # O menu deve se repetir até que o usuário escolha sair.
 
+import random
+random.seed()
+
+arr = [random.randint(0, 10), random.randint(0, 10), random.randint(0, 10), random.randint(0, 10), random.randint(0, 10)]
+action = ""
+
+print(arr)
+
+# while action != "sair":
 
 # 2) Crie uma lista de nomes de cidades. Peça ao usuário para digitar o nome de uma cidade e verifique se ela está presente na lista. 
 # Se estiver, remova a cidade da lista e imprima a lista resultante. Caso contrário, imprima uma mensagem dizendo que a cidade não foi encontrada. 
 # Faça 2 versões desse exercício, uma usando a função “remove” e outra sem usar funções prontas do python.
 
+'''
+cities = ["Rio Grande", "Pelotas", "Rosário", "Gramado", "Gravataí"]
+city = input("Informe a sua cidade: ")
+'''
+
+''' com remove
+cities.remove(city)
+print(cities)
+'''
+
+''' sem remove
+newArr = []
+for item in cities:
+    if item.lower() != city.lower():
+        newArr.append(item)
+
+print(newArr)
+'''
 
 # 3) Crie 3 listas que contém o nome de um produto, o seu preço e a quantidade disponível em estoque. 
 # Peça ao usuário para comprar um produto digitando o nome e a quantidade desejada. 
