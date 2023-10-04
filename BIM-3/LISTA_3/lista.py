@@ -104,10 +104,10 @@ for row in matrix:
 # terceira lista também ordenada, sendo a união das duas primeiras listas. Exiba as listas, e a
 # soma dos seus elementos contidos.
 
+'''
 listaA = []
 listaB = []
 listaC = []
-minimum = 0
 
 for i in range(5):
     number = int(input("Informe o "+str(i+1)+"° valor da lista A: "))
@@ -146,7 +146,7 @@ for num in listaC:
                 tmp.append(num)
                 tmp.append(num2)
             else:
-                if num > num2 and num < sortedArr[c+1]:
+                if num > num2 and ((len(sortedArr) > c+1 and num < sortedArr[c+1]) or (len(sortedArr) <= c+1)):
                     tmp.append(num)
                 else:
                     tmp.append(num2)
@@ -156,7 +156,7 @@ for num in listaC:
         sortedArr = tmp
 
 print(sortedArr)
-
+'''
 
 # 7) Altere o programa anterior para desprezar os números iguais, caso estes existam.
 # Portanto, a lista final não deve possuir números iguais armazenados.
@@ -166,6 +166,40 @@ print(sortedArr)
 # pelo usuário. Crie uma matriz que reúna estas três listas (as listas podem ser as linhas ou as
 # colunas da matriz). Apresente o conteúdo da matriz, assim como o seu maior valor contido
 
+'''
+matriz = [[], [], []]
+max = False
+
+for i in range(5):
+    number = int(input("Informe o "+str(i+1)+"° valor da linha 1: "))    
+    matriz[0].append(number)
+
+    if not max or (max and number > max):
+        max = number
+
+for i in range(5):
+    number = int(input("Informe o "+str(i+1)+"° valor da linha 2: "))    
+    matriz[1].append(number)
+
+    if number > max:
+        max = number
+
+for i in range(5):
+    number = int(input("Informe o "+str(i+1)+"° valor da linha 3: "))    
+    matriz[2].append(number)
+
+    if number > max:
+        max = number
+
+for row in matriz:
+    rowStr = "| "
+    for column in row:
+        rowStr += str(column)+" "
+    rowStr += "|"
+    print(rowStr)
+
+print("Maior valor "+str(max))
+'''
 
 # 9) Faça um programa em Python para jogar o “jogo da velha”. O algoritmo deve permitir que
 # dois jogadores joguem uma partida, usando o computador para ver o tabuleiro. Cada
@@ -174,6 +208,85 @@ print(sortedArr)
 # jogo terminou, e quem foi o vencedor (jogador1 ou jogador2). A cada nova jogada, o
 # programa deve atualizar a situação do tabuleiro na tela.
 
+import random
+
+def RenderGame (values):
+    for row in values:
+        rowStr = ""
+
+        if not row[0]:
+            rowStr += " "
+        else:
+            rowStr += row[0]
+
+        rowStr += "  |  "
+
+        if not row[1]:
+            rowStr += " "
+        else:
+            rowStr += row[1]
+
+        rowStr += "  |  "
+
+        if not row[2]:
+            rowStr += " "
+        else:
+            rowStr += row[2]
+
+        print(rowStr)
+
+def CheckWinner (values):
+    tmpWinner = False
+
+
+    if not tmpWinner and values[0][0] == values[0][1] and values[0][0] == values[0][2]:
+        tmpWinner = values[0][0]
+
+    if not tmpWinner and values[1][0] == values[1][1] and values[1][0] == values[1][2]:
+        tmpWinner = values[1][0]
+
+    if not tmpWinner and values[2][0] == values[2][1] and values[2][0] == values[2][2]:
+        tmpWinner = values[2][0]
+
+    # print(tmpWinner)
+    if tmpWinner:
+        RenderGame(values)
+
+    return tmpWinner
+
+
+winner = False
+turn = "X"
+game = [
+    [False, False, False],
+    [False, False, False],
+    [False, False, False],
+]
+
+while not winner:
+    RenderGame(game)
+
+    print("\nAgora é a vez de "+turn)
+    linha = int(input("Escolha a linha que você quer adicionar (de 1 a 3): "))
+    while linha < 1 or linha > 3 or (linha >= 1 and linha <= 3 and False not in game[linha-1]):
+        linha = int(input("Escolha uma posição válida pra linha (de 1 a 3): "))
+
+    coluna = int(input("Escolha a coluna que você quer adicionar (de 1 a 3): "))
+    while coluna < 1 or coluna > 3 or (coluna >= 1 and coluna <= 3 and game[linha-1][coluna-1]):
+        coluna = int(input("Escolha uma posição válida pra coluna (de 1 a 3): "))
+
+    game[linha-1][coluna-1] = turn
+
+    winner = CheckWinner(game)
+
+    if turn == "X":
+        turn = "O"
+    else:
+        turn = "X"
+
+    print("")
+
+print("O ganhador foi "+winner)
 
 # 10) Escreva um programa em Python que calcule o comprimento da mais longa sequência de
 # espaços em branco em uma string lida.
