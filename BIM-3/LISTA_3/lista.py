@@ -97,11 +97,65 @@ for row in matrix:
 # exatamente como no exemplo, ou seja, a exponenciação deve ser calculada por
 # multiplicações sucessivas.
 
+#####################################      HARD MODE       #################################################
 
 # 6) Faça um programa em Python que leia duas listas de números compostas por cinco
 # elementos informados de maneira ordenada (números em ordem crescente). Crie uma
 # terceira lista também ordenada, sendo a união das duas primeiras listas. Exiba as listas, e a
 # soma dos seus elementos contidos.
+
+listaA = []
+listaB = []
+listaC = []
+minimum = 0
+
+for i in range(5):
+    number = int(input("Informe o "+str(i+1)+"° valor da lista A: "))
+    while len(listaA) > 0 and number <= listaA[-1]:
+        number = int(input("Informe um valor maior que o anterior ("+str(listaA[-1])+"): "))
+    
+    listaA.append(number)
+    if number not in listaC:
+        listaC.append(number)
+
+print(listaA)
+
+for i in range(5):
+    number = int(input("Informe o "+str(i+1)+"° valor da lista B: "))
+    while len(listaB) > 0 and number <= listaB[-1]:
+        number = int(input("Informe um valor maior que o anterior ("+str(listaB[-1])+"): "))
+    
+    listaB.append(number)
+    if number not in listaC:
+        listaC.append(number)
+
+print(listaB)
+print(listaC)
+
+sortedArr = []
+
+for num in listaC:
+    print(num)
+    if len(sortedArr) == 0:
+        sortedArr.append(num)
+    else:
+        tmp = []
+        c = 0
+        for num2 in sortedArr:
+            if num < num2:
+                tmp.append(num)
+                tmp.append(num2)
+            else:
+                if num > num2 and num < sortedArr[c+1]:
+                    tmp.append(num)
+                else:
+                    tmp.append(num2)
+
+            c += 1   
+
+        sortedArr = tmp
+
+print(sortedArr)
 
 
 # 7) Altere o programa anterior para desprezar os números iguais, caso estes existam.
