@@ -208,6 +208,7 @@ print("Maior valor "+str(max))
 # jogo terminou, e quem foi o vencedor (jogador1 ou jogador2). A cada nova jogada, o
 # programa deve atualizar a situação do tabuleiro na tela.
 
+'''
 import random
 
 def RenderGame (values):
@@ -248,7 +249,13 @@ def CheckWinner (values):
     if not tmpWinner and values[2][0] == values[2][1] and values[2][0] == values[2][2]:
         tmpWinner = values[2][0]
 
-    # print(tmpWinner)
+    if not tmpWinner and values[0][0] == values[1][1] and values[1][1] == values[2][2]:
+        tmpWinner = values[0][0]
+
+    if not tmpWinner and values[0][2] == values[1][1] and values[1][1] == values[2][0]:
+        tmpWinner = values[0][2]
+
+    
     if tmpWinner:
         RenderGame(values)
 
@@ -287,6 +294,7 @@ while not winner:
     print("")
 
 print("O ganhador foi "+winner)
+'''
 
 # 10) Escreva um programa em Python que calcule o comprimento da mais longa sequência de
 # espaços em branco em uma string lida.
@@ -295,6 +303,17 @@ print("O ganhador foi "+winner)
 # 11) Implementar um programa para somar matrizes.
 # Obs.: as matrizes obrigatoriamente têm a mesma dimensão.
 
+'''
+| 2 3 4 |   | 2 3 4 |   | 2+2 3+3 4+4 |    | 4 6 8 |   
+| 3 1 3 | + | 2 3 4 | = | 3+2 1+3 3+4 | => | 5 4 7 |
+| 3 1 5 |   | 2 3 4 |   | 3+2 1+3 5+4 |    | 5 4 9 |
+'''
+
+'''
+matrizA = []
+matrizB = []
+matrizC = []
+'''
 
 # 12) Implementar um programa para multiplicar matrizes.
 # Obs (nro de elementos em cada dimensão):
@@ -309,6 +328,42 @@ print("O ganhador foi "+winner)
 # preciso verificar o número de dias em cada mês. O mês de fevereiro pode ter 28 ou 29 dias,
 # dependendo se o ano for bissexto (verificar).
 
+def VerifyBissexto (year):
+    bissexto = False
+
+    if year > 100 and year%100 == 00:
+        if year%400 == 0:
+            bissexto = True
+    else: 
+        if year%4 == 0:
+            bissexto = True
+
+    return bissexto
+
+def ValidDate (day, month, year, bissexto):
+    valid = True
+
+    if day > 31 or day < 1 or month > 12 or month < 1 or year < 0:
+        valid = False
+    else:
+        if day == 31 and (month == 4 or month == 6 or month == 9 or month == 11):
+            valid = False
+        else:
+            if month == 2 and ((bissexto == "false" and day > 28) or (bissexto == "true" and day > 29)):
+                valid = False
+    
+    return valid
+
+def QuantosDias (dia, mes, ano):
+    bissexto = VerifyBissexto(ano)
+    valid = ValidDate(dia, mes, ano, bissexto)
+
+    if valid:
+        print("Eh us guri")
+    else:
+        print("Data inválida")
+        return False
+        
 
 # 14) Um anagrama é uma espécie de jogo de palavras, resultando do rearranjo das letras de
 # uma palavra ou frase para produzir outras palavras, utilizando todas as letras originais
