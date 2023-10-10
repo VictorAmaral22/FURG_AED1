@@ -363,7 +363,14 @@ def QuantosDias (dia, mes, ano):
     else:
         print("Data inválida")
         return False
+    
+dia = int(input("Informe o dia: "))
+mes = int(input("Informe o mês: "))
+ano = int(input("Informe o ano: "))
         
+test = QuantosDias(dia, mes, ano)
+
+
 
 # 14) Um anagrama é uma espécie de jogo de palavras, resultando do rearranjo das letras de
 # uma palavra ou frase para produzir outras palavras, utilizando todas as letras originais
