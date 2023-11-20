@@ -2,11 +2,11 @@
 
 '''
 products = [
-    [1, "Cachorro Quente", 4.0],
-    [2, "X-Salada", 4.5],
-    [3, "X-Bacon", 5.0],
-    [4, "Torrada Simples", 2.0],
-    [5, "Refrigerante", 1.5],
+    { "id": 1, "name": "Cachorro Quente", "price": 4.0 },
+    { "id": 2, "name": "X-Salada", "price": 4.5 },
+    { "id": 3, "name": "X-Bacon", "price": 5.0 },
+    { "id": 4, "name": "Torrada Simples", "price": 2.0 },
+    { "id": 5, "name": "Refrigerante", "price": 1.5 },
 ]
 
 product, qtd = [int(x) for x in input().strip().split(' ')]
@@ -14,8 +14,8 @@ product, qtd = [int(x) for x in input().strip().split(' ')]
 total = 0
 
 for prod in products:
-    if prod[0] == product:
-        total = prod[2]*qtd
+    if prod["id"] == product:
+        total = prod["price"]*qtd
 
 print(f"Total: R$ {total:.2f}")
 '''
@@ -27,89 +27,75 @@ vert = input()
 category = input()
 food = input()
 
-if vert == "vertebrado":
-    if category == "ave":
-        if food == "carnivoro":
-            print("aguia")
-        if food == "onivoro":
-            print("pomba")
-    if category == "mamifero":
-        if food == "herbivoro":
-            print("vaca")
-        if food == "onivoro":
-            print("homem")
-else:
-    if category == "inseto":
-        if food == "hematofago":
-            print("pulga")
-        if food == "herbivoro":
-            print("lagarta")
-    if category == "anelideo":
-        if food == "hematofago":
-            print("sanguessuga")
-        if food == "onivoro":
-            print("minhoca")
+animal = {
+    "vertebrado": {
+        "ave": {
+            "carnivoro": "aguia",
+            "onivoro": "pomba",
+        },
+        "mamifero": {
+            "herbivoro": "vaca",
+            "onivoro": "homem",
+        },
+    },
+    "invertebrado": {
+        "inseto": {
+            "hematofago": "pulga",
+            "herbivoro": "lagarta",
+        },
+        "anelideo": {
+            "hematofago": "sanguessuga",
+            "onivoro": "minhoca",
+        },
+    },
+}
+
+print(animal[vert][category][food])
 '''
 
 # Exrc 3
 
 '''
-ddd = [
-    [61, "Brasilia"],
-    [71, "Salvador"],
-    [11, "Sao Paulo"],
-    [21, "Rio de Janeiro"],
-    [32, "Juiz de Fora"],
-    [19, "Campinas"],
-    [27, "Vitoria"],
-    [31, "Belo Horizonte"],
-]
+ddd = { 
+    "61": "Brasilia",
+    "71": "Salvador",
+    "11": "Sao Paulo",
+    "21": "Rio de Janeiro",
+    "32": "Juiz de Fora",
+    "19": "Campinas",
+    "27": "Vitoria",
+    "31": "Belo Horizonte" 
+}
 
-number = int(input())
+number = input()
 
-city = ""
-
-for d in ddd:
-    if d[0] == number:
-        city = d[1]
-        break
-        
-if city == "":
-    print("DDD nao cadastrado")
+if number in ddd:
+    print(ddd[number])
 else:
-    print(city)
+    print("DDD nao cadastrado")
+
 '''
 
 # Exrc 4
 
-cases = int(input())
+casos = int(input())
 
-for case in range(cases):
-    frase = input().strip().lower()
+for caso in range(casos):
+    produtos = int(input())
 
-    freq = []
-    letters = []
-    
-    for letra in frase:
-        if(letra in "abcdefghijklmnopqrstuvwxyz"):
-            if letra in letters:
-                freq[letters.index(letra)][1] += 1
-            else:
-                letters.append(letra)
-                freq.append([
-                    letra,
-                    1
-                ])
-    
-    maior = 0
-    for letra in freq:
-        if letra[1] > maior:
-            maior = letra[1]
-    
-    resposta = []
-    for letra in freq:
-        if(letra[1] == maior):
-            resposta.append(letra[0])
-    
-    resposta.sort()
-    print(''.join(resposta))
+    precos = {}
+
+    for prod in range(produtos):
+        fruta, preco = input().strip().split(' ')
+
+        precos[fruta] = float(preco)
+
+    compras = int(input())
+
+    total = 0.0
+    for prod in range(compras):
+        fruta, quantidade = input().strip().split(' ')
+
+        total += int(quantidade) * precos[fruta]
+
+    print(f'R$ {total:.2f}')
